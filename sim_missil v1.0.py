@@ -1,0 +1,67 @@
+from time import sleep
+from random import choice
+
+# Este é um jogo simulador de prompt em Python. Lançamento de Míssil.
+
+print('-='*20)
+print('NUCLEAR MISSILE LAUNCH PROTOCOL')
+print('-='*20)
+
+# O jogador pode escolher entre lançar ou não. (Y = Sim / N = Não)
+resposta=str(input('LAUNCH MISSILE ? (Y/N): ')).lower().strip()
+
+# De acordo com a resposta do jogador... Nesse caso foi pressionado "Sim" ou "Y".
+if resposta == 'y':
+
+# Aqui há uma contagem regressiva...
+    print('\033[91m[ WARNING: NUCLEAR PROTOCOL INITIATED ]\033[0m')
+    for contagem in range(5,0,-1):
+        print(contagem)
+        sleep(1)
+
+    for i in range(10):
+        print('Launching' + '.' * (i % 4), end='\r')
+        sleep(0.3)
+# Após a contagem regressiva, o míssil é lançado.
+    print('[ MISSILE LAUNCH ]')
+
+# Logo após o lançamento há um sistema de "Sorte", onde o míssil irá ou não encontrar seu alvo.
+    chances = [ 0, 1,]
+    dado1 = choice(chances)
+    dado2 = choice(chances)
+
+    sleep(2)
+
+# Caso o primeiro sorteio entre 1 ou 0 dê 0, o míssil conseguirá travar em seu alvo!
+    if dado1 == 0:
+        
+        print('[ TARGET ACQUIRED! ]')
+        sleep(2)
+        
+        # Caso travado o alvo, se o próximo sorteio também for um número 0, o míssil conseguiu atingir seu alvo e cumprir sua missão!
+        if dado2 == 0:
+            
+            print('[ TARGET DESTROYED! ]')
+            sleep(2)
+            
+            print('\033[92m[ MISSION ACCOMPLISHED ]\033[0m')
+        
+        # Caso o sorteio seja 1, o alvo foi travado mas não foi atingido. missão falhada.
+        else:
+            
+            print('[ MISSILE DESTROYED! ]')
+            sleep(1)
+            
+            print('[ MISSION FAILED! ] ')
+
+# Caso o primeiro sorteio seja 1, o míssil não conseguiu travar seu alvo, sendo destruído no processo.    
+    else:
+        
+        print('[ MISSILE DESTROYED! ]')
+        sleep(1)
+        
+        print('[ MISSION FAILED! ] ')
+    
+# Se a resposta inicial do jogador foi "N", logo então foi negado o lançamento e a missão de lançamento foi cancelada.
+elif resposta == 'n':
+    print('[ LAUNCH CANCELED ]')
